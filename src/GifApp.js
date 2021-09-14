@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { AddCategory } from './components/AddCategory';
+import { GifGrid } from './components/GifGrid';
 // import PropTypes from 'prop-types'
 import './index.css';
 
@@ -7,7 +8,7 @@ const GifApp = () => {
 
     // const categories = ['Futbol', 'Basquetball', 'Volleyball'];
 
-    const [categories, setCategories] = useState(['Futbol', 'Basquetball', 'Volleyball']);    
+    const [categories, setCategories] = useState(['Futbol']);    
     
     // const handleAdd = () => {
     //     setCategories(oldArray => [...oldArray, 'newElement']);
@@ -21,7 +22,11 @@ const GifApp = () => {
             {/* <button onClick={handleAdd}>Add</button> */}
             <ol>
                 {
-                    categories.map( category => <li key={category}>{ category }</li>) 
+                    categories.map( category => 
+                        <GifGrid 
+                            key={category}
+                            category={category} 
+                        />)    
                 }
             </ol>
         </div>
