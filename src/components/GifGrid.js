@@ -1,35 +1,25 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
+import { useFetchGifs } from '../hooks/useFetchGifs';
+import { GifGridItem } from './GifGridItem';
 
 export const GifGrid = ({category}) => {
 
-    const [gifs, setGifs] = useState([])
-    useEffect(() => {
-        getGifs();
-    }, [])
-
-    const getGifs = async() => {
-        const url = 'https://api.giphy.com/v1/gifs/search?q=Breaking+bad&limit=10&api_key=K1JRWy8nWR754BvDYszwhGvAoLfebXuz';
-        const dataGifs = await fetch( url );
-        const {data} = await dataGifs.json();
-        const gifs = data.map( gif => {
-            return {
-                id: gif.id,
-                title: gif.title,
-                url: gif.images?.downsized_medium.url
-            }
-        })
-        console.log(gifs);
-        setGifs(gifs);
-    }
+    const {data: gif, loadding} = useFetchGifs(category);
 
     return (
-        <div>
+        <>
             <h3>{category}</h3>
-            <ol>
-                {gifs.map(({id, title}) => 
-                    <li key={id}> {title} </li>
-                )}
-            </ol>
-        </div>
+            { loadding && <p>Loading...</p> }
+            <div className="card-grid">
+                {
+                    gif.map((gif) => (
+                        <GifGridItem
+                            key = {gif.id}
+                            {...gif}
+                        />
+                    ))
+                }
+            </div>
+        </>
     )
 }

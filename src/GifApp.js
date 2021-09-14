@@ -8,7 +8,7 @@ const GifApp = () => {
 
     // const categories = ['Futbol', 'Basquetball', 'Volleyball'];
 
-    const [categories, setCategories] = useState(['Futbol']);    
+    const [categories, setCategories] = useState(['Goku']);    
     
     // const handleAdd = () => {
     //     setCategories(oldArray => [...oldArray, 'newElement']);
